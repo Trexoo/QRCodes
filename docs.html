@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="QRCore API Documentation - Complete guide to integrating QR code generation into your applications">
+    <meta name="keywords" content="QR API, QR code API, REST API, QR integration, API documentation">
+    <title>API Documentation - QRCore</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary-color: #64748b;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --code-bg: #1e293b;
+            --code-text: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .docs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .sidebar-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .sidebar-links a:hover, .sidebar-links a.active {
+            color: var(--primary-color);
+        }
+
+        .content {
+            min-width: 0;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .subsection {
+            margin-bottom: 2rem;
+        }
+
+        .subsection-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+        }
+
+        .inline-code {
+            background: var(--surface);
+            color: var(--primary-color);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+        }
+
+        .endpoint {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .endpoint-header {
+            background: var(--surface);
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .http-method {
+            background: var(--success);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .http-method.post {
+            background: var(--warning);
+        }
+
+        .endpoint-url {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-weight: 500;
+        }
+
+        .endpoint-body {
+            padding: 1.5rem;
+        }
+
+        .params-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .params-table th,
+        .params-table td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .params-table th {
+            background: var(--surface);
+            font-weight: 600;
+        }
+
+        .param-required {
+            color: var(--error);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .param-optional {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .response-example {
+            background: var(--surface);
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .quick-start {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .quick-start h3 {
+            margin: 0 0 1rem 0;
+        }
+
+        .auth-badge {
+            background: var(--warning);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .docs-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .sidebar {
+                order: 2;
+                position: static;
+            }
+
+            .nav-content {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="logo">QRCore</a>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="features.html">Features</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="docs.html" class="active">API Docs</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="docs-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Getting Started</h3>
+                <ul class="sidebar-links">
+                    <li><a href="#overview" class="active">Overview</a></li>
+                    <li><a href="#authentication">Authentication</a></li>
+                    <li><a href="#quick-start">Quick Start</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">API Reference</h3>
+                <ul class="sidebar-links">
+                    <li><a href="#generate-qr">Generate QR Code</a></li>
+                    <li><a href="#bulk-generate">Bulk Generation</a></li>
+                    <li><a href="#qr-analytics">Analytics</a></li>
+                    <li><a href="#qr-management">Management</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">SDKs & Tools</h3>
+                <ul class="sidebar-links">
+                    <li><a href="#javascript-sdk">JavaScript SDK</a></li>
+                    <li><a href="#python-sdk">Python SDK</a></li>
+                    <li><a href="#php-sdk">PHP SDK</a></li>
+                    <li><a href="#postman">Postman Collection</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content">
+            <h1 class="page-title">API Documentation</h1>
+            <p class="page-subtitle">Complete guide to integrating QRCore into your applications</p>
+
+            <div class="quick-start">
+                <h3>🚀 Get Started in Minutes</h3>
+                <p>Generate your first QR code with just one API call. No complex setup required.</p>
+                <div class="code-block">
+curl -X GET "https://api.qrcore.com/v1/generate" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -G -d "data=https://example.com" \
+  -d "format=png" \
+  -d "size=300"</div>
+            </div>
+
+            <section id="overview" class="section">
+                <h2 class="section-title">Overview</h2>
+                <p>The QRCore API provides a simple, powerful way to generate and manage QR codes programmatically. Our RESTful API supports all major QR code types, advanced customization options, and comprehensive analytics.</p>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Base URL</h3>
+                    <div class="code-block">https://api.qrcore.com/v1</div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Response Format</h3>
+                    <p>All API responses are returned in JSON format, except for QR code image endpoints which return binary image data.</p>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Rate Limits</h3>
+                    <p>Rate limits vary by plan:</p>
+                    <ul>
+                        <li><strong>Starter:</strong> 100 requests/month</li>
+                        <li><strong>Pro:</strong> 1,000 requests/month</li>
+                        <li><strong>Business:</strong> 10,000 requests/month</li>
+                        <li><strong>Enterprise:</strong> Unlimited</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="authentication" class="section">
+                <h2 class="section-title">Authentication</h2>
+                <p>QRCore uses API keys for authentication. Include your API key in the <code class="inline-code">Authorization</code> header with the <code class="inline-code">Bearer</code> scheme.</p>
+                
+                <div class="code-block">Authorization: Bearer YOUR_API_KEY</div>
+                
+                <p>You can find your API key in your <a href="dashboard.html">dashboard</a> under API Settings.</p>
+            </section>
+
+            <section id="generate-qr" class="section">
+                <h2 class="section-title">Generate QR Code</h2>
+                
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="http-method">GET</span>
+                        <span class="endpoint-url">/v1/generate</span>
+                        <span class="auth-badge">Requires Auth</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Generate a QR code with the specified content and customization options.</p>
+                        
+                        <h4>Parameters</h4>
+                        <table class="params-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Type</th>
+                                    <th>Required</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code class="inline-code">data</code></td>
+                                    <td>string</td>
+                                    <td><span class="param-required">Required</span></td>
+                                    <td>The content to encode in the QR code</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="inline-code">type</code></td>
+                                    <td>string</td>
+                                    <td><span class="param-optional">Optional</span></td>
+                                    <td>QR code type: url, text, email, phone, sms, wifi, vcard</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="inline-code">format</code></td>
+                                    <td>string</td>
+                                    <td><span class="param-optional">Optional</span></td>
+                                    <td>Output format: png, svg, pdf (default: png)</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="inline-code">size</code></td>
+                                    <td>integer</td>
+                                    <td><span class="param-optional">Optional</span></td>
+                                    <td>Size in pixels: 100-1000 (default: 300)</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="inline-code">color</code></td>
+                                    <td>string</td>
+                                    <td><span class="param-optional">Optional</span></td>
+                                    <td>Foreground color (hex without #)</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="inline-code">background</code></td>
+                                    <td>string</td>
+                                    <td><span class="param-optional">Optional</span></td>
+                                    <td>Background color (hex without #)</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="inline-code">error_correction</code></td>
+                                    <td>string</td>
+                                    <td><span class="param-optional">Optional</span></td>
+                                    <td>Error correction level: L, M, Q, H (default: M)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Example Request</h4>
+                        <div class="code-block">
+curl -X GET "https://api.qrcore.com/v1/generate" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -G \
+  -d "data=https://qrcore.com" \
+  -d "type=url" \
+  -d "format=png" \
+  -d "size=400" \
+  -d "color=2563eb" \
+  -d "background=ffffff"</div>
+
+                        <h4>Response</h4>
+                        <p>Returns binary image data with appropriate Content-Type header.</p>
+                        
+                        <div class="response-example">
+                            <strong>Success Response (200 OK):</strong><br>
+                            Content-Type: image/png<br>
+                            [Binary PNG image data]
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="bulk-generate" class="section">
+                <h2 class="section-title">Bulk Generation</h2>
+                
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="http-method post">POST</span>
+                        <span class="endpoint-url">/v1/bulk/generate</span>
+                        <span class="auth-badge">Requires Auth</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Generate multiple QR codes in a single request. Perfect for large-scale operations.</p>
+                        
+                        <h4>Request Body</h4>
+                        <div class="code-block">
+{
+  "qr_codes": [
+    {
+      "id": "qr_1",
+      "data": "https://example.com/page1",
+      "type": "url",
+      "size": 300
+    },
+    {
+      "id": "qr_2", 
+      "data": "Contact us at support@example.com",
+      "type": "text",
+      "color": "2563eb"
+    }
+  ],
+  "format": "png",
+  "download_as_zip": true
+}</div>
+
+                        <h4>Response</h4>
+                        <div class="response-example">
+                            <strong>Success Response (200 OK):</strong><br>
+                            Returns ZIP file containing all generated QR codes
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="qr-analytics" class="section">
+                <h2 class="section-title">Analytics</h2>
+                
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="http-method">GET</span>
+                        <span class="endpoint-url">/v1/analytics/{qr_id}</span>
+                        <span class="auth-badge">Requires Auth</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Get detailed analytics for a specific QR code.</p>
+                        
+                        <h4>Response</h4>
+                        <div class="code-block">
+{
+  "qr_id": "qr_12345",
+  "total_scans": 1247,
+  "unique_scans": 892,
+  "scan_locations": [
+    {"country": "US", "scans": 543},
+    {"country": "UK", "scans": 234}
+  ],
+  "device_types": {
+    "mobile": 78.5,
+    "desktop": 21.5
+  },
+  "scan_timeline": [
+    {"date": "2024-08-20", "scans": 45},
+    {"date": "2024-08-21", "scans": 67}
+  ]
+}</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="javascript-sdk" class="section">
+                <h2 class="section-title">JavaScript SDK</h2>
+                <p>Install the official JavaScript SDK for easier integration:</p>
+                
+                <div class="code-block">npm install @qrcore/sdk</div>
+                
+                <h4>Usage Example</h4>
+                <div class="code-block">
+import QRCore from '@qrcore/sdk';
+
+const qrcore = new QRCore('YOUR_API_KEY');
+
+// Generate a QR code
+const qrCode = await qrcore.generate({
+  data: 'https://example.com',
+  type: 'url',
+  size: 400,
+  color: '2563eb'
+});
+
+console.log(qrCode.url); // URL to the generated QR code</div>
+            </section>
+
+            <section id="python-sdk" class="section">
+                <h2 class="section-title">Python SDK</h2>
+                <p>Install the official Python SDK:</p>
+                
+                <div class="code-block">pip install qrcore-python</div>
+                
+                <h4>Usage Example</h4>
+                <div class="code-block">
+from qrcore import QRCore
+
+qrcore = QRCore(api_key='YOUR_API_KEY')
+
+# Generate a QR code
+qr_code = qrcore.generate(
+    data='https://example.com',
+    type='url',
+    size=400,
+    color='2563eb'
+)
+
+# Save to file
+with open('qrcode.png', 'wb') as f:
+    f.write(qr_code.content)</div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Smooth scrolling for sidebar links
+        document.querySelectorAll('.sidebar-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Update active link
+                    document.querySelectorAll('.sidebar-links a').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Update active link on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            const scrollPosition = window.scrollY + 120;
+            
+            sections.forEach(section => {
+                if (section.offsetTop <= scrollPosition && 
+                    (section.offsetTop + section.offsetHeight) > scrollPosition) {
+                    const sectionId = section.getAttribute('id');
+                    document.querySelectorAll('.sidebar-links a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + sectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

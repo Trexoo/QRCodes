@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about QRCore - The advanced QR code SaaS platform transforming how businesses create and manage QR codes">
+    <meta name="keywords" content="about QRCore, QR code company, QR SaaS platform, QR technology">
+    <title>About Us - QRCore</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary-color: #64748b;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .team-member {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .member-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .member-bio {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            background: var(--surface);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 20px;
+            margin: 4rem 0;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid var(--primary-color);
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .nav-content {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="logo">QRCore</a>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="features.html">Features</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="docs.html">API Docs</a>
+                <a href="about.html" class="active">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">About QRCore</h1>
+            <p class="hero-subtitle">We're on a mission to revolutionize how businesses create, customize, and track QR codes with the most advanced SaaS platform in the industry.</p>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <section class="section">
+            <h2 class="section-title">Our Story</h2>
+            <div class="story-content">
+                <p>Founded in 2024, QRCore emerged from a simple observation: despite QR codes being everywhere, most QR generation tools were outdated, limited, and lacking the advanced features modern businesses need.</p>
+                
+                <p>Our team of developers, designers, and business strategists came together with a shared vision: to create the most comprehensive, user-friendly, and powerful QR code platform ever built. We wanted to bridge the gap between simple QR generators and enterprise-grade solutions.</p>
+                
+                <p>Today, QRCore serves thousands of businesses worldwide, from startups to Fortune 500 companies, helping them create branded QR experiences that drive engagement and provide valuable insights.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">10M+</div>
+                    <div class="stat-label">QR Codes Generated</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime SLA</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🚀</div>
+                    <h3 class="value-title">Innovation First</h3>
+                    <p>We constantly push the boundaries of what's possible with QR technology, introducing features that anticipate tomorrow's needs.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3 class="value-title">Customer Success</h3>
+                    <p>Our customers' success is our success. We build every feature with their business outcomes in mind.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🔒</div>
+                    <h3 class="value-title">Security & Privacy</h3>
+                    <p>We take data protection seriously, implementing enterprise-grade security measures and maintaining strict privacy standards.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌍</div>
+                    <h3 class="value-title">Global Accessibility</h3>
+                    <p>QR codes should work everywhere, for everyone. We ensure our platform is accessible and reliable worldwide.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">⚡</div>
+                    <h3 class="value-title">Performance</h3>
+                    <p>Speed and reliability are non-negotiable. Our infrastructure is built to handle millions of requests with lightning-fast response times.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3 class="value-title">Partnership</h3>
+                    <p>We see our customers as partners, working together to create QR solutions that drive real business value.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">👨‍💻</div>
+                    <h3 class="member-name">Alex Johnson</h3>
+                    <div class="member-role">CEO & Co-founder</div>
+                    <p class="member-bio">Former tech lead at major SaaS companies. Alex brings 10+ years of experience building scalable platforms that serve millions of users.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">👩‍🔬</div>
+                    <h3 class="member-name">Sarah Chen</h3>
+                    <div class="member-role">CTO & Co-founder</div>
+                    <p class="member-bio">Computer vision and machine learning expert. Sarah architected QRCore's advanced QR generation and analytics systems.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">👨‍🎨</div>
+                    <h3 class="member-name">Michael Rodriguez</h3>
+                    <div class="member-role">Head of Design</div>
+                    <p class="member-bio">Award-winning UX designer who previously led design teams at top tech companies. Michael ensures QRCore is beautiful and intuitive.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">👩‍💼</div>
+                    <h3 class="member-name">Emily Watson</h3>
+                    <div class="member-role">VP of Customer Success</div>
+                    <p class="member-bio">Customer success veteran with a passion for helping businesses achieve their goals. Emily leads our world-class support team.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2 class="cta-title">Ready to Transform Your QR Strategy?</h2>
+            <p class="cta-description">Join thousands of businesses already using QRCore to create, customize, and track their QR codes with advanced analytics and enterprise-grade features.</p>
+            <div class="cta-buttons">
+                <a href="index.html" class="btn-primary">Start Free Trial</a>
+                <a href="pricing.html" class="btn-secondary">View Pricing</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Awards & Recognition</h2>
+            <div style="text-align: center; color: var(--text-secondary);">
+                <p>🏆 <strong>Best SaaS Startup 2024</strong> - TechCrunch Awards</p>
+                <p>⭐ <strong>Top API Developer Tool</strong> - Product Hunt</p>
+                <p>🌟 <strong>Customer Choice Award</strong> - G2 Software Reviews</p>
+                <p>🚀 <strong>Fast-Growing SaaS Company</strong> - SaaS Weekly</p>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 QRCore - Advanced QR Code SaaS Platform. All rights reserved.</p>
+        <p style="margin-top: 1rem;">
+            <a href="terms.html" style="color: white; margin: 0 1rem;">Terms of Service</a>
+            <a href="privacy.html" style="color: white; margin: 0 1rem;">Privacy Policy</a>
+            <a href="help.html" style="color: white; margin: 0 1rem;">Help Center</a>
+        </p>
+    </footer>
+</body>
+</html>

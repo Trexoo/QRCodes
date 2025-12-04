@@ -107,6 +107,90 @@ ORG:${organization}
 URL:${website}
 END:VCARD`;
             break;
+            
+        case 'gs1':
+            const gtin = document.getElementById('gs1-gtin').value;
+            const lot = document.getElementById('gs1-lot').value;
+            const serial = document.getElementById('gs1-serial').value;
+            const expiry = document.getElementById('gs1-expiry').value;
+            const gs1Url = document.getElementById('gs1-url').value;
+            
+            if (gs1Url) {
+                data = gs1Url;
+            } else {
+                // GS1 Application Identifiers format
+                data = `(01)${gtin}`;
+                if (lot) data += `(10)${lot}`;
+                if (serial) data += `(21)${serial}`;
+                if (expiry) {
+                    const expiryDate = new Date(expiry);
+                    const yymmdd = expiryDate.toISOString().slice(2, 10).replace(/-/g, '');
+                    data += `(17)${yymmdd}`;
+                }
+            }
+            break;
+            
+        case 'upc':
+            const upcCode = document.getElementById('upc-code').value;
+            data = upcCode.padStart(12, '0');
+            break;
+            
+        case 'ean':
+            const eanType = document.getElementById('ean-type').value;
+            const eanCode = document.getElementById('ean-code').value;
+            const padLength = eanType === 'EAN13' ? 13 : 8;
+            data = eanCode.padStart(padLength, '0');
+            break;
+            
+        case 'event':
+            const eventTitle = document.getElementById('event-title').value;
+            const eventStart = document.getElementById('event-start').value;
+            const eventEnd = document.getElementById('event-end').value;
+            const eventLocation = document.getElementById('event-location').value;
+            const eventDescription = document.getElementById('event-description').value;
+            
+            const formatDateTime = (dt) => {
+                if (!dt) return '';
+                return new Date(dt).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+            };
+            
+            data = `BEGIN:VEVENT
+SUMMARY:${eventTitle}
+DTSTART:${formatDateTime(eventStart)}
+DTEND:${formatDateTime(eventEnd)}
+LOCATION:${eventLocation}
+DESCRIPTION:${eventDescription}
+END:VEVENT`;
+            break;
+            
+        case 'location':
+            const lat = document.getElementById('geo-latitude').value;
+            const lng = document.getElementById('geo-longitude').value;
+            const geoLabel = document.getElementById('geo-label').value;
+            
+            if (geoLabel) {
+                data = `geo:${lat},${lng}?q=${encodeURIComponent(geoLabel)}`;
+            } else {
+                data = `geo:${lat},${lng}`;
+            }
+            break;
+            
+        case 'bitcoin':
+            const btcAddress = document.getElementById('btc-address').value;
+            const btcAmount = document.getElementById('btc-amount').value;
+            const btcLabel = document.getElementById('btc-label').value;
+            const btcMessage = document.getElementById('btc-message').value;
+            
+            let btcParams = [];
+            if (btcAmount) btcParams.push(`amount=${btcAmount}`);
+            if (btcLabel) btcParams.push(`label=${encodeURIComponent(btcLabel)}`);
+            if (btcMessage) btcParams.push(`message=${encodeURIComponent(btcMessage)}`);
+            
+            data = `bitcoin:${btcAddress}`;
+            if (btcParams.length > 0) {
+                data += '?' + btcParams.join('&');
+            }
+            break;
     }
     
     return data;

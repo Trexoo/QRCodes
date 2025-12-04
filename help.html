@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="QRCore Help Center - Find answers to common questions and get support">
+    <meta name="keywords" content="QRCore help, support, FAQ, documentation, troubleshooting">
+    <title>Help Center - QRCore</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary-color: #64748b;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-left: 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: var(--background);
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            transition: transform 0.2s;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+            display: none;
+            border-top: 1px solid var(--border);
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        .faq-answer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .contact-section {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            margin-bottom: 3rem;
+        }
+
+        .contact-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .contact-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-options {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-option {
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+            min-width: 200px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .contact-option:hover {
+            border-color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .contact-option-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-option-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-option-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .resource-card:hover {
+            border-color: var(--primary-color);
+        }
+
+        .resource-icon {
+            font-size: 2rem;
+        }
+
+        .resource-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .resource-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 2rem 1rem; }
+            .nav-content { padding: 0 1rem; }
+            .nav-links { gap: 1rem; }
+            .hero-title { font-size: 2rem; }
+            .contact-options { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="logo">QRCore</a>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="features.html">Features</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="docs.html">API Docs</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <h1 class="hero-title">How can we help you?</h1>
+        <p class="hero-subtitle">Search our knowledge base or browse categories below</p>
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Search for help articles..." id="searchInput" onkeyup="handleSearch(event)">
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Categories -->
+        <div class="categories-grid">
+            <a href="#getting-started" class="category-card">
+                <div class="category-icon">🚀</div>
+                <h3 class="category-title">Getting Started</h3>
+                <p class="category-description">Learn the basics of creating and managing QR codes</p>
+            </a>
+            <a href="#account" class="category-card">
+                <div class="category-icon">👤</div>
+                <h3 class="category-title">Account & Billing</h3>
+                <p class="category-description">Manage your account, subscription, and payments</p>
+            </a>
+            <a href="#api" class="category-card">
+                <div class="category-icon">⚙️</div>
+                <h3 class="category-title">API Integration</h3>
+                <p class="category-description">Integrate QRCore into your applications</p>
+            </a>
+            <a href="#qr-types" class="category-card">
+                <div class="category-icon">📱</div>
+                <h3 class="category-title">QR Code Types</h3>
+                <p class="category-description">Learn about different QR code formats and uses</p>
+            </a>
+            <a href="#analytics" class="category-card">
+                <div class="category-icon">📊</div>
+                <h3 class="category-title">Analytics & Tracking</h3>
+                <p class="category-description">Track scans and analyze QR code performance</p>
+            </a>
+            <a href="#troubleshooting" class="category-card">
+                <div class="category-icon">🔧</div>
+                <h3 class="category-title">Troubleshooting</h3>
+                <p class="category-description">Solve common issues and error messages</p>
+            </a>
+        </div>
+
+        <!-- FAQ Section -->
+        <section class="faq-section" id="faq">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-item" id="getting-started">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How do I create my first QR code?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Creating a QR code is simple:</p>
+                    <ol>
+                        <li>Go to the <a href="index.html">QR Generator</a></li>
+                        <li>Select the QR code type (URL, text, email, etc.)</li>
+                        <li>Enter your content in the form fields</li>
+                        <li>Customize colors and size if desired</li>
+                        <li>Click "Generate QR Code"</li>
+                        <li>Download in your preferred format</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="faq-item" id="account">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How do I upgrade my subscription plan?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>To upgrade your plan:</p>
+                    <ol>
+                        <li>Log in to your <a href="dashboard.html">Dashboard</a></li>
+                        <li>Click on "Account Settings" or visit the <a href="pricing.html">Pricing page</a></li>
+                        <li>Select your desired plan</li>
+                        <li>Complete the payment process</li>
+                    </ol>
+                    <p>Your new plan features will be available immediately. You'll be charged a prorated amount for the current billing period.</p>
+                </div>
+            </div>
+
+            <div class="faq-item" id="api">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How do I get my API key?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>API access is available on Pro and higher plans. To get your API key:</p>
+                    <ol>
+                        <li>Go to your <a href="api-keys.html">API Keys page</a></li>
+                        <li>Click "Create New Key"</li>
+                        <li>Name your key and set permissions</li>
+                        <li>Copy and securely store your API key</li>
+                    </ol>
+                    <p>See our <a href="docs.html">API Documentation</a> for integration guides.</p>
+                </div>
+            </div>
+
+            <div class="faq-item" id="qr-types">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What QR code types are supported?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>QRCore supports 13+ QR code types:</p>
+                    <ul>
+                        <li><strong>URL:</strong> Link to websites</li>
+                        <li><strong>Text:</strong> Plain text messages</li>
+                        <li><strong>Email:</strong> Pre-filled email composition</li>
+                        <li><strong>Phone:</strong> Click-to-call phone numbers</li>
+                        <li><strong>SMS:</strong> Pre-filled text messages</li>
+                        <li><strong>WiFi:</strong> Network connection details</li>
+                        <li><strong>vCard:</strong> Contact information cards</li>
+                        <li><strong>GS1:</strong> Industry-standard product codes</li>
+                        <li><strong>UPC/EAN:</strong> Barcode formats</li>
+                        <li><strong>Event:</strong> Calendar events</li>
+                        <li><strong>Location:</strong> GPS coordinates</li>
+                        <li><strong>Bitcoin:</strong> Cryptocurrency payments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item" id="analytics">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How does QR code tracking work?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>QRCore tracking (available on Pro and higher plans) works by creating dynamic QR codes that redirect through our servers. This allows us to capture:</p>
+                    <ul>
+                        <li>Total and unique scan counts</li>
+                        <li>Geographic location (city/country level)</li>
+                        <li>Device type (mobile/desktop)</li>
+                        <li>Time and date of scans</li>
+                        <li>Referrer information</li>
+                    </ul>
+                    <p>View analytics in your <a href="dashboard.html">Dashboard</a>.</p>
+                </div>
+            </div>
+
+            <div class="faq-item" id="troubleshooting">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>My QR code isn't scanning. What should I do?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>If your QR code isn't scanning, try these steps:</p>
+                    <ol>
+                        <li><strong>Size:</strong> Ensure the QR code is at least 2cm x 2cm (0.8in x 0.8in)</li>
+                        <li><strong>Contrast:</strong> Use high contrast colors (dark foreground, light background)</li>
+                        <li><strong>Quality:</strong> Download in PNG or SVG format for best quality</li>
+                        <li><strong>Error Correction:</strong> Use "High" error correction for printed materials</li>
+                        <li><strong>Content:</strong> Verify the encoded content is valid and accessible</li>
+                        <li><strong>Lighting:</strong> Avoid glare or shadows when scanning</li>
+                    </ol>
+                    <p>If issues persist, <a href="#contact">contact our support team</a>.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Can I cancel my subscription?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, you can cancel your subscription at any time:</p>
+                    <ol>
+                        <li>Go to your Dashboard → Account Settings</li>
+                        <li>Click "Manage Subscription"</li>
+                        <li>Select "Cancel Subscription"</li>
+                    </ol>
+                    <p>Your access will continue until the end of your current billing period. Your QR codes will remain functional, but you'll lose access to premium features after cancellation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <h2 class="contact-title">Still Need Help?</h2>
+            <p class="contact-description">Our support team is here to help you with any questions or issues</p>
+            
+            <div class="contact-options">
+                <a href="mailto:support@qrcore.com" class="contact-option">
+                    <div class="contact-option-icon">📧</div>
+                    <div class="contact-option-title">Email Support</div>
+                    <div class="contact-option-text">support@qrcore.com</div>
+                </a>
+                <a href="#" class="contact-option" onclick="openChat()">
+                    <div class="contact-option-icon">💬</div>
+                    <div class="contact-option-title">Live Chat</div>
+                    <div class="contact-option-text">Available 9am-6pm EST</div>
+                </a>
+                <a href="docs.html" class="contact-option">
+                    <div class="contact-option-icon">📚</div>
+                    <div class="contact-option-title">Documentation</div>
+                    <div class="contact-option-text">API guides & references</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section>
+            <h2 class="section-title">Helpful Resources</h2>
+            <div class="resources-grid">
+                <a href="docs.html" class="resource-card">
+                    <div class="resource-icon">📖</div>
+                    <div>
+                        <div class="resource-title">API Documentation</div>
+                        <div class="resource-description">Complete API reference and guides</div>
+                    </div>
+                </a>
+                <a href="features.html" class="resource-card">
+                    <div class="resource-icon">⭐</div>
+                    <div>
+                        <div class="resource-title">Features Overview</div>
+                        <div class="resource-description">Explore all QRCore capabilities</div>
+                    </div>
+                </a>
+                <a href="pricing.html" class="resource-card">
+                    <div class="resource-icon">💰</div>
+                    <div>
+                        <div class="resource-title">Pricing Plans</div>
+                        <div class="resource-description">Compare plans and features</div>
+                    </div>
+                </a>
+                <a href="about.html" class="resource-card">
+                    <div class="resource-icon">🏢</div>
+                    <div>
+                        <div class="resource-title">About QRCore</div>
+                        <div class="resource-description">Learn about our company</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 QRCore - Advanced QR Code SaaS Platform. All rights reserved.</p>
+        <p style="margin-top: 1rem;">
+            <a href="terms.html" style="color: white; margin: 0 1rem;">Terms of Service</a>
+            <a href="privacy.html" style="color: white; margin: 0 1rem;">Privacy Policy</a>
+            <a href="help.html" style="color: white; margin: 0 1rem;">Help Center</a>
+        </p>
+    </footer>
+
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('.faq-toggle');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                if (ans !== answer) {
+                    ans.classList.remove('active');
+                }
+            });
+            document.querySelectorAll('.faq-toggle').forEach(ic => {
+                if (ic !== icon) {
+                    ic.textContent = '+';
+                }
+            });
+            
+            // Toggle current FAQ
+            answer.classList.toggle('active');
+            icon.textContent = answer.classList.contains('active') ? '−' : '+';
+        }
+
+        function handleSearch(event) {
+            if (event.key === 'Enter') {
+                const query = document.getElementById('searchInput').value.toLowerCase();
+                const faqItems = document.querySelectorAll('.faq-item');
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(query) || answer.includes(query)) {
+                        item.style.display = 'block';
+                        if (query.length > 0) {
+                            item.querySelector('.faq-answer').classList.add('active');
+                            item.querySelector('.faq-toggle').textContent = '−';
+                        }
+                    } else if (query.length > 0) {
+                        item.style.display = 'none';
+                    } else {
+                        item.style.display = 'block';
+                        item.querySelector('.faq-answer').classList.remove('active');
+                        item.querySelector('.faq-toggle').textContent = '+';
+                    }
+                });
+            }
+        }
+
+        function openChat() {
+            alert('Live chat feature coming soon! For now, please email us at support@qrcore.com');
+        }
+
+        // Handle anchor links
+        if (window.location.hash) {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+    </script>
+</body>
+</html>

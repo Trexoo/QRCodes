@@ -502,7 +502,8 @@
         }
 
         function generateApiKey() {
-            return 'qrc_' + Array.from(crypto.getRandomValues(new Uint8Array(24)))
+            const API_KEY_PREFIX = 'qrc_live_';
+            return API_KEY_PREFIX + Array.from(crypto.getRandomValues(new Uint8Array(24)))
                 .map(b => b.toString(16).padStart(2, '0'))
                 .join('');
         }

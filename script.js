@@ -124,8 +124,10 @@ END:VCARD`;
                 if (serial) data += `(21)${serial}`;
                 if (expiry) {
                     const expiryDate = new Date(expiry);
-                    const yymmdd = expiryDate.toISOString().slice(2, 10).replace(/-/g, '');
-                    data += `(17)${yymmdd}`;
+                    const year = expiryDate.getFullYear().toString().slice(-2);
+                    const month = (expiryDate.getMonth() + 1).toString().padStart(2, '0');
+                    const day = expiryDate.getDate().toString().padStart(2, '0');
+                    data += `(17)${year}${month}${day}`;
                 }
             }
             break;

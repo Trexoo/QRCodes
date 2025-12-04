@@ -45,33 +45,36 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Load QR history from localStorage (demo purposes)
-    const loadData = () => {
+    // Using setTimeout to avoid synchronous setState warning in strict mode
+    const timeoutId = setTimeout(() => {
       const savedHistory = localStorage.getItem('qrHistory');
       if (savedHistory) {
-        const history = JSON.parse(savedHistory);
-        setQrHistory(history);
+        try {
+          const history = JSON.parse(savedHistory);
+          setQrHistory(history);
 
-        const currentMonth = new Date().getMonth();
-        const currentYear = new Date().getFullYear();
-        const thisMonthQRs = history.filter((qr: QRCodeItem) => {
-          const qrDate = new Date(qr.timestamp);
-          return qrDate.getMonth() === currentMonth && qrDate.getFullYear() === currentYear;
-        }).length;
+          const currentMonth = new Date().getMonth();
+          const currentYear = new Date().getFullYear();
+          const thisMonthQRs = history.filter((qr: QRCodeItem) => {
+            const qrDate = new Date(qr.timestamp);
+            return qrDate.getMonth() === currentMonth && qrDate.getFullYear() === currentYear;
+          }).length;
 
-        const totalScans = history.length * Math.floor(Math.random() * 50) + Math.floor(Math.random() * 100);
-        
-        setStats({
-          totalQRs: history.length,
-          thisMonthQRs,
-          totalScans,
-          avgScans: history.length > 0 ? Math.floor(totalScans / history.length) : 0,
-        });
+          const totalScans = history.length * Math.floor(Math.random() * 50) + Math.floor(Math.random() * 100);
+          
+          setStats({
+            totalQRs: history.length,
+            thisMonthQRs,
+            totalScans,
+            avgScans: history.length > 0 ? Math.floor(totalScans / history.length) : 0,
+          });
+        } catch {
+          // Invalid JSON in localStorage, ignore
+        }
       }
-    };
+    }, 0);
     
-    // Use requestAnimationFrame to avoid synchronous setState in effect
-    const frame = requestAnimationFrame(loadData);
-    return () => cancelAnimationFrame(frame);
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const deleteQR = (id: string) => {

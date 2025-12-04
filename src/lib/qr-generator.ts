@@ -87,12 +87,14 @@ export function generateQRData(
       return `WIFI:T:${security};S:${ssid};P:${password};;`;
 
     case 'vcard':
-      const firstName = formData.firstName || '';
-      const lastName = formData.lastName || '';
-      const vcardEmail = formData.email || '';
-      const vcardPhone = formData.phone || '';
-      const organization = formData.organization || '';
-      const website = formData.website || '';
+      // Sanitize vCard fields to prevent format corruption
+      const sanitizeVCardField = (str: string) => str.replace(/[\n\r;:]/g, ' ').trim();
+      const firstName = sanitizeVCardField(formData.firstName || '');
+      const lastName = sanitizeVCardField(formData.lastName || '');
+      const vcardEmail = sanitizeVCardField(formData.email || '');
+      const vcardPhone = sanitizeVCardField(formData.phone || '');
+      const organization = sanitizeVCardField(formData.organization || '');
+      const website = sanitizeVCardField(formData.website || '');
       return `BEGIN:VCARD
 VERSION:3.0
 FN:${firstName} ${lastName}
@@ -119,10 +121,13 @@ END:VCARD`;
       if (serial) gs1Data += `(21)${serial}`;
       if (expiry) {
         const expiryDate = new Date(expiry);
-        const year = expiryDate.getFullYear().toString().slice(-2);
-        const month = (expiryDate.getMonth() + 1).toString().padStart(2, '0');
-        const day = expiryDate.getDate().toString().padStart(2, '0');
-        gs1Data += `(17)${year}${month}${day}`;
+        // Validate that the date is valid
+        if (!isNaN(expiryDate.getTime())) {
+          const year = expiryDate.getFullYear().toString().slice(-2);
+          const month = (expiryDate.getMonth() + 1).toString().padStart(2, '0');
+          const day = expiryDate.getDate().toString().padStart(2, '0');
+          gs1Data += `(17)${year}${month}${day}`;
+        }
       }
       return gs1Data;
 

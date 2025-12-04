@@ -350,6 +350,7 @@
             <button class="tab-btn active" onclick="switchTab('recent')">Recent QR Codes</button>
             <button class="tab-btn" onclick="switchTab('analytics')">Analytics</button>
             <button class="tab-btn" onclick="switchTab('bulk')">Bulk Operations</button>
+            <button class="tab-btn" onclick="switchTab('api')">API Keys</button>
         </div>
 
         <!-- Recent QR Codes Tab -->
@@ -422,6 +423,48 @@
 url,https://example.com,Website QR
 text,Hello World,Greeting QR
 email,contact@example.com,Contact Email</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Keys Tab -->
+        <div id="api-tab" class="tab-content">
+            <div class="section-header">
+                <h2 class="section-title">API Access</h2>
+                <a href="api-keys.html" class="btn-primary">Manage API Keys</a>
+            </div>
+            
+            <div style="background: white; padding: 2rem; border-radius: 12px; border: 1px solid var(--border);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                    <div style="text-align: center; padding: 1.5rem; background: var(--background); border-radius: 12px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔑</div>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" id="active-api-keys">2</div>
+                        <div style="color: var(--text-secondary);">Active API Keys</div>
+                    </div>
+                    <div style="text-align: center; padding: 1.5rem; background: var(--background); border-radius: 12px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📊</div>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" id="api-calls-used">247</div>
+                        <div style="color: var(--text-secondary);">API Calls This Month</div>
+                    </div>
+                    <div style="text-align: center; padding: 1.5rem; background: var(--background); border-radius: 12px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📈</div>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" id="api-limit">1,000</div>
+                        <div style="color: var(--text-secondary);">Monthly Limit</div>
+                    </div>
+                </div>
+
+                <h3>Quick Start</h3>
+                <p>Generate a QR code using the API:</p>
+                <div style="background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 8px; font-family: monospace; overflow-x: auto; margin: 1rem 0;">
+curl -X GET "https://api.qrcore.com/v1/generate" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -G -d "data=https://example.com" \
+  -d "format=png"
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                    <a href="api-keys.html" class="btn-primary">Create API Key</a>
+                    <a href="docs.html" style="padding: 0.75rem 1.5rem; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text-primary); font-weight: 500;">View Documentation</a>
                 </div>
             </div>
         </div>

@@ -80,6 +80,10 @@
             color: var(--primary-color);
         }
 
+        .nav-links a.login-link {
+            color: var(--primary-color);
+        }
+
         .hero-section {
             flex: 1;
             display: flex;
@@ -382,6 +386,7 @@
                     <a href="pricing.html">Pricing</a>
                     <a href="docs.html">API Docs</a>
                     <a href="about.html">About</a>
+                    <a href="login.html" class="login-link">Login</a>
                 </div>
             </div>
         </nav>
@@ -400,6 +405,12 @@
                     <button class="qr-type-btn" data-type="sms">💬 SMS</button>
                     <button class="qr-type-btn" data-type="wifi">📶 WiFi</button>
                     <button class="qr-type-btn" data-type="vcard">👤 vCard</button>
+                    <button class="qr-type-btn" data-type="gs1">📦 GS1</button>
+                    <button class="qr-type-btn" data-type="upc">🏷️ UPC</button>
+                    <button class="qr-type-btn" data-type="ean">🔢 EAN</button>
+                    <button class="qr-type-btn" data-type="event">📅 Event</button>
+                    <button class="qr-type-btn" data-type="location">📍 Location</button>
+                    <button class="qr-type-btn" data-type="bitcoin">₿ Bitcoin</button>
                 </div>
 
                 <!-- Input Section -->
@@ -511,6 +522,127 @@
                         <div class="input-group">
                             <label for="vcard-website">Website</label>
                             <input type="url" id="vcard-website" class="input-field" placeholder="https://example.com">
+                        </div>
+                    </div>
+
+                    <!-- GS1 Digital Link Form -->
+                    <div id="gs1-form">
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="gs1-gtin">GTIN (Global Trade Item Number)</label>
+                                <input type="text" id="gs1-gtin" class="input-field" placeholder="01234567890123" maxlength="14">
+                            </div>
+                            <div class="input-group">
+                                <label for="gs1-lot">Lot/Batch Number (Optional)</label>
+                                <input type="text" id="gs1-lot" class="input-field" placeholder="LOT123">
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="gs1-serial">Serial Number (Optional)</label>
+                                <input type="text" id="gs1-serial" class="input-field" placeholder="SER456789">
+                            </div>
+                            <div class="input-group">
+                                <label for="gs1-expiry">Expiry Date (Optional)</label>
+                                <input type="date" id="gs1-expiry" class="input-field">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="gs1-url">GS1 Digital Link URL (Optional)</label>
+                            <input type="url" id="gs1-url" class="input-field" placeholder="https://id.gs1.org/01/01234567890123">
+                        </div>
+                    </div>
+
+                    <!-- UPC Barcode Form -->
+                    <div id="upc-form">
+                        <div class="input-group">
+                            <label for="upc-code">UPC-A Code (12 digits)</label>
+                            <input type="text" id="upc-code" class="input-field" placeholder="012345678901" maxlength="12">
+                        </div>
+                        <div class="input-group">
+                            <label for="upc-product">Product Name (Optional)</label>
+                            <input type="text" id="upc-product" class="input-field" placeholder="Product Name">
+                        </div>
+                    </div>
+
+                    <!-- EAN Barcode Form -->
+                    <div id="ean-form">
+                        <div class="input-group">
+                            <label for="ean-type">EAN Type</label>
+                            <select id="ean-type" class="input-field">
+                                <option value="EAN13">EAN-13 (13 digits)</option>
+                                <option value="EAN8">EAN-8 (8 digits)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="ean-code">EAN Code</label>
+                            <input type="text" id="ean-code" class="input-field" placeholder="1234567890123" maxlength="13">
+                        </div>
+                    </div>
+
+                    <!-- Event/Calendar Form -->
+                    <div id="event-form">
+                        <div class="input-group">
+                            <label for="event-title">Event Title</label>
+                            <input type="text" id="event-title" class="input-field" placeholder="Conference 2024">
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="event-start">Start Date & Time</label>
+                                <input type="datetime-local" id="event-start" class="input-field">
+                            </div>
+                            <div class="input-group">
+                                <label for="event-end">End Date & Time</label>
+                                <input type="datetime-local" id="event-end" class="input-field">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="event-location">Location</label>
+                            <input type="text" id="event-location" class="input-field" placeholder="123 Main St, City">
+                        </div>
+                        <div class="input-group">
+                            <label for="event-description">Description</label>
+                            <textarea id="event-description" class="input-field" rows="3" placeholder="Event description..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Location/Geo Form -->
+                    <div id="location-form">
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="geo-latitude">Latitude</label>
+                                <input type="number" id="geo-latitude" class="input-field" placeholder="40.7128" step="any">
+                            </div>
+                            <div class="input-group">
+                                <label for="geo-longitude">Longitude</label>
+                                <input type="number" id="geo-longitude" class="input-field" placeholder="-74.0060" step="any">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="geo-label">Location Name (Optional)</label>
+                            <input type="text" id="geo-label" class="input-field" placeholder="New York City">
+                        </div>
+                    </div>
+
+                    <!-- Bitcoin/Crypto Payment Form -->
+                    <div id="bitcoin-form">
+                        <div class="input-group">
+                            <label for="btc-address">Bitcoin Address</label>
+                            <input type="text" id="btc-address" class="input-field" placeholder="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh">
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="btc-amount">Amount (BTC - Optional)</label>
+                                <input type="number" id="btc-amount" class="input-field" placeholder="0.001" step="any">
+                            </div>
+                            <div class="input-group">
+                                <label for="btc-label">Label (Optional)</label>
+                                <input type="text" id="btc-label" class="input-field" placeholder="Payment for services">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="btc-message">Message (Optional)</label>
+                            <input type="text" id="btc-message" class="input-field" placeholder="Thank you for your payment">
                         </div>
                     </div>
                 </div>

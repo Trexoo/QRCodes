@@ -329,6 +329,7 @@
                     <li><a href="#generate-qr">Generate QR Code</a></li>
                     <li><a href="#bulk-generate">Bulk Generation</a></li>
                     <li><a href="#qr-analytics">Analytics</a></li>
+                    <li><a href="#industry-standards">Industry Standards</a></li>
                     <li><a href="#qr-management">Management</a></li>
                 </ul>
             </div>
@@ -560,6 +561,122 @@ curl -X GET "https://api.qrcore.com/v1/generate" \
   ]
 }</div>
                     </div>
+                </div>
+            </section>
+
+            <section id="industry-standards" class="section">
+                <h2 class="section-title">Industry Standard QR Codes</h2>
+                <p>QRCore supports a wide range of industry-standard QR code formats for retail, logistics, healthcare, and manufacturing applications.</p>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">GS1 Digital Link</h3>
+                    <p>Generate GS1-compliant QR codes for product identification and traceability.</p>
+                    <div class="code-block">
+curl -X GET "https://api.qrcore.com/v1/generate" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -G -d "type=gs1" \
+  -d "gtin=01234567890123" \
+  -d "lot=LOT123" \
+  -d "serial=SER456789" \
+  -d "expiry=2025-12-31"</div>
+                    
+                    <h4>GS1 Parameters</h4>
+                    <table class="params-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>AI Code</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="inline-code">gtin</code></td>
+                                <td>01</td>
+                                <td>Global Trade Item Number (8, 12, 13, or 14 digits)</td>
+                            </tr>
+                            <tr>
+                                <td><code class="inline-code">lot</code></td>
+                                <td>10</td>
+                                <td>Batch/Lot number</td>
+                            </tr>
+                            <tr>
+                                <td><code class="inline-code">serial</code></td>
+                                <td>21</td>
+                                <td>Serial number</td>
+                            </tr>
+                            <tr>
+                                <td><code class="inline-code">expiry</code></td>
+                                <td>17</td>
+                                <td>Expiration date (YYMMDD format)</td>
+                            </tr>
+                            <tr>
+                                <td><code class="inline-code">weight</code></td>
+                                <td>310x</td>
+                                <td>Net weight in kg</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">UPC-A Barcode</h3>
+                    <p>Generate UPC-A barcodes for retail products in North America.</p>
+                    <div class="code-block">
+curl -X GET "https://api.qrcore.com/v1/generate" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -G -d "type=upc" \
+  -d "code=012345678901" \
+  -d "format=png"</div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">EAN-13 / EAN-8</h3>
+                    <p>Generate European Article Number barcodes for international retail.</p>
+                    <div class="code-block">
+curl -X GET "https://api.qrcore.com/v1/generate" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -G -d "type=ean" \
+  -d "ean_type=EAN13" \
+  -d "code=1234567890123"</div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Calendar Events (iCalendar)</h3>
+                    <p>Generate QR codes that add events to calendars.</p>
+                    <div class="code-block">
+curl -X GET "https://api.qrcore.com/v1/generate" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -G -d "type=event" \
+  -d "title=Team Meeting" \
+  -d "start=2024-12-15T10:00:00" \
+  -d "end=2024-12-15T11:00:00" \
+  -d "location=Conference Room A" \
+  -d "description=Quarterly review"</div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Geographic Location</h3>
+                    <p>Generate QR codes with GPS coordinates for location sharing.</p>
+                    <div class="code-block">
+curl -X GET "https://api.qrcore.com/v1/generate" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -G -d "type=location" \
+  -d "latitude=40.7128" \
+  -d "longitude=-74.0060" \
+  -d "label=New York City"</div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Bitcoin/Cryptocurrency</h3>
+                    <p>Generate payment QR codes for cryptocurrency transactions.</p>
+                    <div class="code-block">
+curl -X GET "https://api.qrcore.com/v1/generate" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -G -d "type=bitcoin" \
+  -d "address=bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" \
+  -d "amount=0.001" \
+  -d "label=Payment"</div>
                 </div>
             </section>
 
